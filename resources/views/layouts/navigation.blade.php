@@ -24,10 +24,10 @@
                 </div>
                 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('users-list')" :active="request()->routeIs('users-list', 'users-view', 'users-edit')">
+                    <x-nav-link :href="route('category.index')" :active="request()->routeIs('categories.index', 'category.create', 'category.edit', 'category.show')">
                         {{ __('Categorias') }}
                     </x-nav-link>
-                </div>  
+                </div>                  
             </div>
 
             <!-- Settings Dropdown -->

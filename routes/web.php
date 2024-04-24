@@ -34,5 +34,6 @@ Route::prefix('users')->middleware(['auth'])->group(function () {
 });
 
 Route::resource('category', CategoryController::class)->middleware(['auth']);
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');

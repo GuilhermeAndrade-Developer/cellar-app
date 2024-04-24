@@ -6,7 +6,7 @@
                     <div class="flex justify-between items-center mb-6">
                         <div class="text-xl font-semibold">Lista de Categorias</div>
                         <x-primary-button>
-                            <a href="{{ route('register') }}">Registrar</a>
+                            <a href="{{ route('category.create') }}">Registrar</a>
                         </x-primary-button>
                     </div>
                     <div class="overflow-x-auto">
@@ -14,34 +14,29 @@
                             <thead>
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium">ID</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium">NOME</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium">EMAIL</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium">FUNÇÃO</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium">ÚLTIMA ATIVIDADE
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium">Nome</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium">Descrição</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium">Categoria Pai
                                     </th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium">AÇÕES</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium">Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($categories as $category)
                                     <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap text-center">
-                                            <a href="{{ route('users-view', $user->id) }}"
-                                                class="text-blue-500 hover:text-blue-700">{{ $user->id }}</a>
+                                        <td class="px-6 py-4 whitespace-nowrap text-center"><a
+                                                href="{{ route('category.show', $category->id) }}">{{ $category->id }}</a>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-center"><a
+                                                href="{{ route('category.show', $category->id) }}">{{ $category->name }}</a>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-center">{{ $category->description }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center">
-                                            <a href="{{ route('users-view', $user->id) }}"
-                                                class="text-blue-500 hover:text-blue-700">{{ $user->name }}</a>
-                                        </td>
+                                            {{ $category->parent ? $category->parent->name : '-' }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-center">
-                                            <a href="{{ route('users-view', $user->id) }}"
-                                                class="text-blue-500 hover:text-blue-700">{{ $user->email }}</a>
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-center">{{ $user->role }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-center">{{ $user->last_activity }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-center">
-                                            <form action="{{ route('users-delete', $user->id) }}" method="POST">
+                                            <form action="{{ route('category.destroy', $category->id) }}"
+                                                method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <x-danger-button>
